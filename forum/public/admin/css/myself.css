@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+#money{
+	position: relative;
+	bottom: 2px;
+	width: 10px;
+	height: 10px;
+}
+
+.error{
+	position: relative;
+	bottom: 2px;
+}
+
+.correct{
+	position: relative;
+	bottom: 2px;
+}

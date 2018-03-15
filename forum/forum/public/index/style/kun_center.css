@@ -1,0 +1,281 @@
+@charset "UTF-8";
+/*个人中心*/
+#user_image{
+	width: 120px;
+	height: 120px;
+	float: left;
+}
+
+#nick_name{
+	font-size: 28px;
+	position: relative;
+	top: 15px;
+	left: 10px;
+}
+
+#signature{
+	position: relative;
+	top: 15px;
+	left: 10px;	
+}
+
+#sex{
+	display: inline-block;
+	font-size: 15px;
+	position: relative;
+	left: 10px;
+	top: 10px;
+}
+
+#concerns_it{
+	text-align: right;
+}
+
+.concerns_ok{
+	font-size: 21px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	color: black;
+	background-color: #f0f0f0;
+}
+
+.concerns_no{
+	font-size: 21px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	color: white;
+	background-color: rgb(18,105,176);
+}
+
+#edit_userinfo{
+	text-align: right;
+}
+
+#edit_userinfo a{
+	font-size: 21px;
+}
+
+/*******************/
+#live_hr{
+	 height:2px;
+	 margin-bottom: 10px;
+}
+
+#two_live{
+	margin: 0 0 10px 15px;
+}
+
+
+#nav{
+	display: inline-block;
+}
+
+#nav li{
+	display: inline-block;
+	margin: 10px 25px;
+	font-size: 18px;
+}
+
+.live{
+	margin: 10px 0 20px 15px;
+}
+
+#my_live{
+	font-size: 17px;
+	margin-left: 10px;
+	position: relative;
+	top: 4px;	
+}
+
+.hr_hr{
+	border: none;
+	border-top:1px dashed rgb(133,144,166);
+	margin: 10px 10px;
+	width: 800px;
+}
+
+.content img{
+	width: 40px;
+	height: 40px;
+}
+
+.topic_name{
+	font-weight: 700;
+	font-size: 21px;
+	color: black;
+}
+
+.nick_name{
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.users{
+	margin-left: 45px;
+	font-size: 15px;
+}
+
+.users a{
+	font-weight: 700;
+	font-size: 15px;
+	color: black;
+}
+
+.user{
+	font-size: 15px;
+}
+
+.user a{
+	font-weight: 700;
+	font-size: 15px;
+	color: black;
+}
+
+.goodItQuestion{
+	color: rgb(133,144,166);
+}
+
+.comment{
+	font-size: 16px;
+}
+
+.ctime{
+	color: rgb(133,144,166);
+}
+
+.set{
+	color: rgb(133,144,166);	
+}
+
+.set img{
+	width: 15px;
+	height: 15px;
+	margin-bottom: 3px; 
+}
+
+.set span{
+	margin-right: 5px;
+}
+
+/*关注我的人*/
+#i_concerns{
+	margin: 10px 0 20px 15px;
+}
+
+#concerns_me{
+	margin: 10px 0 20px 15px;
+}
+
+.concerns_me img{
+	width: 80px;
+	height: 80px;
+	float: left;
+}
+
+.concerns_user{
+	margin-left: 90px;
+}
+
+.concerns_con a{
+	color: black;
+	float: right;
+	position: relative;
+	bottom: 60px;
+	right: 500px;
+}
+
+/*编辑个人资料*/
+
+#users_image{
+	width: 50px;
+	height: 50px;
+}
+
+/*以下是首页样式*/
+.label-main{
+	margin: 15px;
+}
+
+.topic{
+	margin: 10px 0 20px 0;
+}
+
+.userinfo{
+	margin: 5px 0;
+}
+
+.userinfo img{
+	width: 22px;
+	height: 22px;
+	border-radius: 11px;
+}
+
+.userinfo a{
+	font-size: 15	px;
+	font-weight: 700;
+}
+
+.userinfo span{
+	font-size: 11px;
+}
+
+.qname{
+	margin: 2px 0px;
+	font-weight: 700;
+}
+
+.description{
+	font-size: 13px;
+	margin: 2px 0;
+}
+
+.nice_buttton img{
+	width: 15px;
+	height: 15px;
+	margin-bottom: 3px; 
+}
+
+/*话题页*/
+.offset{
+	margin-top: 10px;
+	margin-left: 20px; 
+}
+
+.user img{
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	float: left;
+}
+
+.index_nick_name{
+	margin-left: 10px;
+	font-weight: 700;
+	font-size: 17px;
+}
+	
+.index_signature{
+	margin-left: 10px;
+	font-size: 13px;
+	color: rgb(133,144,166);
+}
+
+.index_qname{
+	font-weight: 700;
+
+}
+
+.index_ctime{
+	color: rgb(133,144,166);
+	font-size: 14px;	
+}
+
+.index_description{
+	font-size: 16px;
+}
+
+/*container页面*/
+.container_box{
+	padding-top: 15px;
+}
