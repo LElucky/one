@@ -1,7 +1,4 @@
 <?php
-$str = <<<ETO
-DFASDFASDF
-ETO;
-echo $str;
+我是一个好人
 
 ?>
