@@ -4,5 +4,4 @@ DFASDFASDF
 ETO;
 echo $str;
 
-echo 'hahah';
 ?>
