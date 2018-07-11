@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>新建网页</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+
+        <script type="text/javascript">
+//作用域是全局的
+var map = null;     //面板对象
+var food = null;    //食物对象
+var snake = null;   //null是空指针，可以用于声明空对象
+var mytime = null;  //定时器对象
+
+//贪吃蛇
+//① 制作操作面板
+function Map(){
+    this.width = 800;
+    this.height = 400;
+    this.color = "lightblue";
+    
+    //通过方法绘制操作面板
+    this.showmap = function(){
+        //创建div，通过div展示画板
+        var ban = document.createElement('div');
+        ban.style.width = this.width+"px";
+        ban.style.height = this.height+"px";
+        ban.style.backgroundColor = this.color;
+        //对div面板进行定位
+        ban.style.position = "absolute";
+        ban.style.left = 0;
+        ban.style.top = 0;
+        //把div面板追加到body里边
+        document.body.appendChild(ban);
+    }
+}
+
+//② 绘制食物
+function Food(){
+    this.height = 20;
+    this.width = 20;
+    this.color = "red";
+    this.pice = null;   //具体食物
+
+    //食物的位置不固定，每次出现后位置都会发生变化
+    this.showfood = function(){
+        //创建一个食物div
+        if(this.pice == undefined){
+            this.pice = document.createElement('div');
+            this.pice.style.width = this.width+"px";
+            this.pice.style.height = this.height+"px";
+            this.pice.style.backgroundColor = this.color;
+            this.pice.style.position = "absolute";
+        }
+        //定位
+        //让食物的位置发生变化
+        //食物左边最小位置0，右边最大位置780px
+        //获得随机数 0-39,用随机数 * 宽度==就是食物的物理位置
+        //Math.random()    0包括-----1不包括
+        //Math.floor()向下取整
+        this.weiX = Math.floor(Math.random()*40);  //获得0-39之间的随机数
+        this.weiY = Math.floor(Math.random()*20);  //获得0-19之间的随机数
+        this.pice.style.left = this.width*this.weiX+"px";
+        this.pice.style.top = this.width*this.weiY+"px";
+        //body追加shiwu
+        document.body.appendChild(this.pice);
+    }
+}
+
+//③ 绘制蛇
+function Snake(){
+    this.range = 20;  //每个蛇节的宽度和高度都是20
+    //duans的每个元素就是一个蛇节的信息
+    this.duans = [[0,1,'green',null],[1,1,'green',null],[2,1,'green',null],[3,1,'red',null]];
+    this.redirect = "right";    //默认往右边走
+    //绘制小蛇
+    this.showduans = function(){
+        //遍历duans的数组，获得具体蛇的信息
+        for(var i in this.duans){
+        
+          
+            //创建每个蛇段的div
+            //判断每个蛇段，之前是否有创建出来,避免创建重复的蛇段
+            if(this.duans[i][3] == undefined){
+                this.duans[i][3] = document.createElement('div');
+                this.duans[i][3].style.backgroundColor = this.duans[i][2];
+                this.duans[i][3].style.width = this.range+"px";
+                this.duans[i][3].style.height = this.range+"px";
+                this.duans[i][3].style.position = "absolute";
+            }
+            this.duans[i][3].style.left = this.duans[i][0]*this.range+"px";
+            this.duans[i][3].style.top = this.duans[i][1]*this.range+"px";
+            //展示每个蛇段
+            document.body.appendChild(this.duans[i][3]);
+        }
+    }
+
+    //④ 移动小蛇
+    this.moveduans = function(){
+        for(var i=0; i<this.duans.length-1; i++){
+            //当前元素的下标 ===== 下个元素的下标
+            //this.duans[0][0] = this.duans[1][0]
+            //this.duans[1][0] = this.duans[2][0]
+            //this.duans[2][0] = this.duans[3][0]
+            //this.duans[3][0] = this.duans[4][0]  不行
+            this.duans[i][0] = this.duans[i+1][0];  //移动x轴坐标
+            this.duans[i][1] = this.duans[i+1][1];  //移动y轴
+        }
+        //移动头部-右走
+        if(this.redirect == "right"){
+            this.duans[this.duans.length-1][0] += 1;
+        }
+        //下走
+        if(this.redirect == "down"){
+            this.duans[this.duans.length-1][1] += 1;
+        }
+        //左走
+        if(this.redirect == "left"){
+            this.duans[this.duans.length-1][0] -=1;
+        }
+        //上走
+        if(this.redirect == "up"){
+            this.duans[this.duans.length-1][1] -= 1;
+        }
+
+        //判断蛇的头部 X坐标是否超过39
+        //判断蛇的头部 Y坐标是否超过19
+        //判断蛇的头部 X坐标不能小于0
+        //判断蛇的头部 Y坐标不能小于0
+        if(this.duans[this.duans.length-1][0] > 39 ||
+            this.duans[this.duans.length-1][0]<0 ||
+            this.duans[this.duans.length-1][1]>19 ||
+            this.duans[this.duans.length-1][1]<0
+        ){
+            //gameover/停止定时器
+            alert('game over');
+            clearInterval(mytime);
+            return false;       //停止程序执行
+        }
+
+        //判断小蛇是否吃到自己
+        //判断头部坐标与某个蛇段是否相等
+        var touX = this.duans[this.duans.length-1][0];
+        var touY = this.duans[this.duans.length-1][1];
+        //遍历蛇段
+        for(var i=0; i<this.duans.length-1; i++){
+            if(this.duans[i][0]==touX  && this.duans[i][1]==touY){
+                alert('game over by your self');
+                clearInterval(mytime);
+                return false;
+            }
+        }
+
+        
+        //判断蛇头是否碰到食物
+        var sheX = this.duans[this.duans.length-1][0];
+        var sheY = this.duans[this.duans.length-1][1];
+        var fx = food.weiX;
+        var fy = food.weiY;
+        console.log(food);
+        if(sheX==fx && sheY==fy){
+            //① 吃，把一个新段创建出来，新段的坐标就是最后一个蛇段的坐标
+            var newduan = [this.duans[0][0],this.duans[0][1],'green',null];
+            this.duans.unshift(newduan);  //把新段添加进蛇身
+            //② 重新生成食物
+            food.showfood();
+        }
+
+        //蛇段的位置发生变化，重新绘制小蛇
+        this.showduans();
+    }
+}
+
+
+window.onload = function(){
+    //① 绘制面板
+    map = new Map();
+    map.showmap();
+
+    //② 绘制食物
+    food = new Food();
+    food.showfood();
+
+    //③ 绘制小蛇
+    snake = new Snake();
+    snake.showduans();
+
+    //④ 移动小蛇
+    mytime = setInterval("snake.moveduans()",140);
+    //snake.moveduans();   
+
+    //⑤ 给body添加键盘事件
+    document.body.onkeydown = function(evt){
+        if(evt.keyCode == 38){
+            snake.redirect = "up";
+        }else if(evt.keyCode == 40){
+            snake.redirect = "down";
+        }
+        if(evt.keyCode == 37){
+            snake.redirect = "left";
+        }
+        if(evt.keyCode == 39){
+            snake.redirect = "right";
+        }
+    }
+}
+        </script>
+
+        <style type="text/css">
+        </style>
+    </head>
+
+
+    <body>
+
+    </body>
+</html>

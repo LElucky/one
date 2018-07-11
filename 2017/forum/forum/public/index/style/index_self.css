@@ -1,0 +1,195 @@
+.captcha_img{
+	cursor:pointer;
+}
+.login_captcha{
+	position:absolute;
+	right:275px;
+	bottom:162px;
+	cursor:pointer;
+}
+#captcha_login{
+	display:block;
+	width:100px;
+	height:30px;
+	position:absolute;
+	right:150px;
+	bottom:158px;
+}
+#username_login{
+	display:block;
+	width:100px;
+	height:30px;
+	position:absolute;
+	right:150px;
+	bottom:280px;
+}
+#password_login{
+	display:block;
+	width:100px;
+	height:30px;
+	position:absolute;
+	right:150px;
+	bottom:222px;
+}
+.span4_self_userinfo{
+	position:absolute;
+	right:10px;
+	border:0px red solid;
+	top:0px;
+}
+
+
+.Mycare{
+	position:relative;
+	float:left;
+	border:0px red solid;
+	display:block-inline;
+	border-radius:0px;
+	width:190px;
+	height:82px;
+	margin:0px;
+}
+.Mycare>a>font{
+	position:relative;
+	top:-15px;
+	border:0px red solid;
+}
+.Mycare span>img{
+	cursor:pointer;
+	display:block-inline;
+	margin-top:-2px;border:0px red solid;
+}
+.Mycare span a{
+	border:0px red solid;
+	position:absolute;
+	right:3px;
+	bottom:18px;
+}
+.Mycare>span{
+	display:block;
+	border:0px red solid;
+}
+.Mycare>span{
+	position:relative;
+	top:-40px;
+	width:80px;
+	right:-65px;
+	border:0px red solid;
+}
+.Mycare>span>a{
+	position:relative;
+	border:0px red solid;
+	top:0px;
+	right:-10px;
+}
+
+
+
+
+.issue_forum{
+	margin:10px 0;
+	border-radius:20px;
+	padding:20px 5px;
+	width:300px;
+	position:absolute;
+	right:60px;
+	top:0px;
+}
+.issue_forum h5 a{
+	color:red;
+	margin:10px 0;
+}
+.issue_forum a{
+	margin:2px 5px;
+}
+
+#input_subject{
+	padding:20px 0;
+}
+.support{
+	height:130px;
+}
+
+
+
+
+.hot_right h5 a{
+	color:red;
+	margin:10px 0;
+}
+.hot_right ul li{
+	margin:5px 5px;
+}
+.hot_right{
+	border:1px #c0c0c0solid;
+	padding:20px 5px;
+	margin:10px 0;
+	border:1px red solid;
+	border-radius:20px;
+	width:300px;
+	position:absolute;
+	right:60px;
+	top:280px;
+}
+
+
+
+
+
+.navbar_beLikeTo{
+	border:1px gray solid;
+	border-radius:10px;
+	position:absolute;
+	height:120px;
+	width:850px;
+	margin:10px 0;
+}
+.navbar_beLikeTo h4{
+	margin:10px;
+}
+.navbar_beLikeTo span>a{
+	margin:10px 5px;
+}
+.navbar_beLikeTo span{
+	position:absolute;
+	right:0;
+	top:0;
+} 
+.one_piece{
+	width:220px;
+	height:75px;
+	margin:0 25px;
+	float:left;
+	position:relative;
+	border:1px #ffffff solid;
+}
+.one_piece img{
+	width:90px;
+	height:75px;
+}
+.one_piece p{
+	border:0px red solid;
+	position:absolute;
+	right:0;
+	top:50px;
+}
+.a_one{
+	border:0px red solid;
+	position:absolute;
+	top:0;
+	margin:0 0 5px 5px;
+}
+
+.userinfo_background{
+	background:url(../background/1.jpg) no-repeat;
+	width:100%;
+	height:400px;
+	border:1px red solid;
+}
+
+
+
+#total_comment ul li{
+	border:1px red solid;
+}
+

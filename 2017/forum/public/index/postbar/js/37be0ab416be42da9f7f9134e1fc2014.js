@@ -1,0 +1,1 @@
+(function(){var t={on:function(){return this},off:function(){return this},emit:function(){return this},broadcast:function(){return this}};this.pagelet=t}).call(this);
