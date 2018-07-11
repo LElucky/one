@@ -1,3 +1,4 @@
 <?php
-phpinfo();
+$a = 'phpinfo()';
+echo $a;
 ?>
