@@ -1,0 +1,125 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='__STATIC__/admin/css/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+<script src="__STATIC__/admin/js/jquery-1.7.1.js"></script> 
+<script src="__STATIC__/admin/js/public.js"></script> 
+<script type="text/javascript">
+<!--
+$(function(){
+	//用户批量删除时,得到所选所有ID,用,号连接发送到控制器
+	$('[name=delall]').click(function(){
+		var ids = '';
+		nums = 0;
+		$('[name=del]').each(function(){	
+			if ($(this).attr('checked')=='checked'){
+				ids+=$(this).attr('id')+',';
+				nums = nums+1;
+			}		
+		})
+		
+		if (confirm('你确定要删除这 '+nums+' 条记录吗')){
+			location.href="__URL__/delnews?id="+ids;
+		}
+	})
+})
+//-->
+</script>
+
+
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#"  class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">留言管理列表</a> <a href="#" class="current">留言管理列表</a> 
+		</div>
+		<h1>留言管理列表</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span12">
+
+				<div class="widget-box">
+					<div class="widget-title"> 
+						<span class="icon">
+
+						</span>
+						<h5>留言管理列表</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<table class="table table-bordered table-striped with-check">
+							<thead>
+								<tr>
+									<th width="5%"><i class="icon-resize-vertical"></i></th>
+									<th width="5%">编号</th>
+									<th widht='10%'>查阅状态</th>
+									<th width="10%">手机号码</th>
+									<th width="20%">姓名</th>
+									<th width="15%">添加时间</th>
+									<th width="20%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								{volist name="message" id="vo"} 
+									<tr>
+										<td width="5%"><input type="checkbox" name="del" id="{$vo.id}"></td>
+										<td width="5%">{$vo.id}</td>
+										<td width='10%'>
+											{if condition="$vo['is_look'] == 0"}
+
+												<a href="{:url('edit?id='.$vo['id'])}" class="btn btn-warning">未查阅</a>
+
+												{else /}
+
+												 <a href="{:url('edit?id='.$vo['id'])}" class="btn btn-info">已查阅</a>
+
+											{/if}
+										</td>
+										<td width="10%">
+											<a href="{:url('edit?id=')}{$vo.id}">{$vo.phone}</a>
+										</td>
+										<td width="20%">
+											<a href="{:url('edit?id=')}{$vo.id}">{$vo.name}</a>
+										</td>
+										
+										<td width="15%">{$vo.create_time}</td>
+										<td width="20%">
+											<span>
+												<a href="{:url('edit?id='.$vo['id'])}" class="btn btn-info">查看详情</a>
+												<a href="{:url('delnews?id='.$vo['id'])}" class="btn btn-danger" onClick="return confirm('您确定要将它删除吗')">删除</a>
+											</span>
+										</td>
+									</tr>
+								{/volist}
+							</tbody>
+						</table>
+						<center class="pagination">
+							{$message->render()}
+						</center>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<!-- <script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script>  -->
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>

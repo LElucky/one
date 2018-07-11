@@ -1,0 +1,147 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='__STATIC__/admin/css/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+<script src="__STATIC__/admin/js/jquery-1.7.1.js"></script> 
+<script src="__STATIC__/admin/js/public.js"></script> 
+<script type="text/javascript">
+<!--
+$(function(){
+	//用户批量删除时,得到所选所有ID,用,号连接发送到控制器
+	$('[name=delall]').click(function(){
+		var ids = '';
+		nums = 0;
+		$('[name=del]').each(function(){	
+			if ($(this).attr('checked')=='checked'){
+				ids+=$(this).attr('id')+',';
+				nums = nums+1;
+			}		
+		})
+		
+		if (confirm('你确定要删除这 '+nums+' 条记录吗')){
+			location.href="__URL__/delnews?id="+ids;
+		}
+	});
+	//快速转换已发布和未发布
+	$('[name=fb]').click(function(){
+		var value = $(this).attr('class');
+		var id = $(this).attr('id');
+		$(this).removeClass();
+		if (value=='nfb'){
+			$(this).addClass('yfb').text('已发布');	
+			$.post('__URL__/fb',{id:id});
+		}else{
+			$(this).addClass('nfb').text('未发布');
+			$.post('__URL__/fb',{id:id});	
+		}
+	})
+})
+//-->
+</script>
+<style type="text/css">
+.nfb{color:#444; font-weight:900}	
+.yfb{color:green;}
+p{display:inline;margin:0; padding:0; color:red;}
+.imgclass{max-width:40px; max-height:40px;}
+</style>
+
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#"  class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">单页面管理</a> <a href="#" class="current">单页面列表</a> 
+		</div>
+		<h1>单页面列表</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span12">
+
+				<div class="widget-box">
+					<div class="widget-title">
+						<h5>单页面列表</h5>
+						<form action="{:url('Single/index')}" method="get">
+							按 <select name="search_bzb" style="width:100px;">
+								<option {php} if(isset($_GET['search_bzb'])) echo ($_GET['search_bzb']=='address') ? 'selected=selected' : ""; {/php} value="address">页面位置</option>
+								<option {php} if(isset($_GET['search_bzb'])) echo ($_GET['search_bzb']=='title') ? 'selected=selected' : ""; {/php} value="title">标题</option>
+								<option {php} if(isset($_GET['search_bzb'])) echo ($_GET['search_bzb']=='webtitle') ? 'selected=selected' : ""; {/php} value="webtitle">网站标题</option>
+								<option {php} if(isset($_GET['search_bzb'])) echo ($_GET['search_bzb']=='webkeys') ? 'selected=selected' : ""; {/php} value="webkeys">网站关键词</option>
+								<option {php} if(isset($_GET['search_bzb'])) echo ($_GET['search_bzb']=='webdesc') ? 'selected=selected' : ""; {/php} value="webdesc">网站描述</option>
+								<option {php} if(isset($_GET['search_bzb'])) echo ($_GET['search_bzb']=='id') ? 'selected=selected' : ""; {/php} value="id">编号</option>
+							</select>
+							<input type="text" name="bzb" class="inp span3" style="width:100px;" placeholder="关键词" value="{$Think.get.bzb}">&nbsp;&nbsp;
+							
+							按 <select name="search_tdb" style="width:100px;">
+								<option {php} if(isset($_GET['search_tdb'])) echo ($_GET['search_tdb']=='update_time') ? 'selected=selected' : ""; {/php} value="update_time">添加时间</option>
+								<option {php} if(isset($_GET['search_tdb'])) echo ($_GET['search_tdb']=='id') ? 'selected=selected' : ""; {/php} value="id">编号</option>
+							</select>
+
+							进行 <select name="order" style="width:100px;">
+								<option {php} if(isset($_GET['order'])) echo  ($_GET['order']=='desc') ? 'selected=selected' : ""; {/php} value="desc">降序</option>
+								<option {php} if(isset($_GET['order'])) echo  ($_GET['order']=='asc') ? 'selected=selected' : ""; {/php} value="asc">升序</option>
+							</select>
+							<input type="submit" name="search" value="查询" class="btn btn-success">
+						</form>
+					</div>
+					<div class="widget-content nopadding">
+						<table class="table table-bordered table-striped with-check">
+							<thead>
+								<tr>
+									<th width="5%">编号</th>
+									<th width="25%">页面位置</th>
+									<th width="25%">标题</th>
+									<th width="15%">最近更新</th>
+									<th width="20%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								{volist name="list" id="vo"} 
+									<tr>
+										<td width="5%">{$vo.id}</td>
+										<td width="25%">
+											<a href="{:url('editnews?id=')}{$vo.id}">{$vo.address}</a>
+										</td>
+										<td width="25%">
+											<a href="{:url('editnews?id=')}{$vo.id}">{$vo['title']|mb_substr=0,10,'utf-8'}</a>
+										</td>
+										<td width="15%">{$vo.update_time}</td>
+																<td width="20%">
+											<span>
+												<a href="{:url('single/edit?id='.$vo['id'])}" class="btn btn-info">修改</a>
+												<a href="{:url('single/delete?id='.$vo['id'])}" class="btn btn-danger" onClick="return confirm('您确定要将它删除吗')">删除</a>
+											</span>
+										</td>
+									</tr>
+								{/volist}
+							</tbody>
+						</table>
+						<div class="pages">
+							{$list->render()}
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<!-- <script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script>  -->
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>

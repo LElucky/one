@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>网站管理后台</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+	<link rel="stylesheet" href="__STATIC__/admin/css/fullcalendar.css" />
+	<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+	<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+	<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+	<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+	<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/jquery.gritter.css" />
+	<link href="__STATIC__/admin/css/css?family=Open+Sans:400,700,800" rel='stylesheet' type='text/css'>
+
+<!-- music 音乐 -->
+<link rel="stylesheet" type="text/css" href="__STATIC__/MP3/css/audio.css">
+
+	<script src="__STATIC__/admin/js/excanvas.min.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+	<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.flot.min.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.flot.resize.min.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.peity.min.js"></script> 
+	<script src="__STATIC__/admin/js/fullcalendar.min.js"></script> 
+	<script src="__STATIC__/admin/js/matrix.js"></script> 
+	<!-- <script src="__STATIC__/admin/js/matrix.dashboard.js"></script>  -->
+	<script src="__STATIC__/admin/js/jquery.gritter.min.js"></script> 
+	<script src="__STATIC__/admin/js/matrix.interface.js"></script> 
+	<script src="__STATIC__/admin/js/matrix.chat.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.validate.js"></script> 
+	<script src="__STATIC__/admin/js/matrix.form_validation.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.wizard.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+	<script src="__STATIC__/admin/js/select2.min.js"></script> 
+	<script src="__STATIC__/admin/js/matrix.popover.js"></script> 
+	<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> 
+	<script src="__STATIC__/admin/js/matrix.tables.js"></script> 
+</head>
+<body>
+<div id="user-nav" class="navbar navbar-inverse">
+	<ul class="nav">
+		<li class="">
+			<a title="" href="{:url('/i/index')}">
+				<i class="icon icon-user2"></i>
+				<span class="text">欢迎  {$Think.SESSION.username}  使用本网站后台管理系统</span>
+			</a>
+		</li>
+		<li class="">
+			<a title="进入网站" href="{:url('/')}" target="_black">
+				<span class="text">进入网站</span>
+			</a>
+		</li>
+		<li class="">
+			<a title="刷新" href="{:url('/i/index')}">
+				<i class="icon icon-sx"></i> 
+				<span class="text">刷新</span>
+			</a>
+		</li>
+		<li class="">
+			<a title="退出" href="{:url('/a/logout')}">
+				<i class="icon icon-share-alt"></i> 
+				<span class="text">退出</span>
+			</a>
+		</li>
+	</ul>
+	<ul class="menutop fright">
+       <li><a href="{:url('/i/index')}">返回首页</a></li>
+       <li><a target="right" href="{:url('/u/uedit?id='.$Think.session.user_id)}">修改密码 </a></li>
+       <li><a  target="right" href="{:url('/i/config')}">服务器信息</a></li>
+    </ul>
+</div>
+<style type="text/css">
+::-webkit-scrollbar {width: 3px;}
+::-webkit-scrollbar-track {
+	-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.8);
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background:#000; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background:#fff; 
+}
+</style>
+<div id="sidebar">
+	<div id="header">
+		<a href="{:url('/i/index')}"><h1>小鱼在线</h1></a>
+	</div>
+	<ul style="position:absolute; height:730px; overflow:auto">
+		
+            {volist name='list_1' id='l_1'}
+			<li class="submenu" class="active"> 
+				<a target="right" href="#">
+					<i class="icon icon-th-list"></i> 
+					<span>{$l_1['name']}</span> 
+				</a>
+				<ul>
+					  {volist name="list_2" id="l_2"}
+						 {if condition="$l_2['pid'] eq $l_1['id']"}
+							<li><a target="right" href="{:url('/')}{$l_2['path']}">{$l_2['name']}</a></li>
+						 {/if}
+					{/volist}
+				</ul>
+			</li>
+
+
+
+
+		{/volist} 
+		<li class="submenu" class="active"> 
+			<a target="right" href="#">
+				<i class="icon icon-th-list"></i> 
+				<span>密码管理</span> 
+			</a>
+			<ul>
+				<li><a target="right" href="{:url('/u/uedit?id='.$Think.session.user_id)}">修改密码</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!--sidebar-menu-->
+
+<div class="audio-box">
+		<div class="audio-container">
+			<div class="audio-cover"></div>
+			<div class="audio-view">
+				<h3 class="audio-title">未知歌曲</h3>
+				<div class="audio-body">
+					<div class="audio-backs">
+						<div class="audio-this-time">00:00</div>
+						<div class="audio-count-time">00:00</div>
+						<div class="audio-setbacks">
+							<i class="audio-this-setbacks">
+								<span class="audio-backs-btn"></span>
+							</i>
+							<span class="audio-cache-setbacks">
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="audio-btn">
+					<div class="audio-select">
+						<div class="audio-prev"></div>
+						<div class="audio-play"></div>
+						<div class="audio-next"></div>
+						<div class="audio-menu"></div>
+						<div class="audio-volume"></div>
+					</div>
+					<div class="audio-set-volume">
+						<div class="volume-box">
+							<i><span></span></i>
+						</div>
+					</div>
+					<div class="audio-list">
+						<div class="audio-list-head">
+							<p>☺随心听</p>
+							<span class="menu-close">关闭</span>
+						</div>
+						<ul class="audio-inline">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div id="content1" style="height:100%">
+	<iframe name="right" id="rightMain" src="{:url('/i/base')}" frameborder="on" scrolling="auto" width="100%" height="100%" allowtransparency="true"></iframe>
+</div>
+
+<div class="row-fluid">
+	<div id="footer" class="span12">
+		咨询热线：010-5365-3700&nbsp;&nbsp;&nbsp;&nbsp;Copyright 2009-2017&nbsp;&nbsp;&nbsp;&nbsp;All right reserved&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.bjxiaoyu.com" target="_blank">小鱼在线</a>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+	function goPage (newURL) {
+		if (newURL != "") {
+			if (newURL == "-" ) {
+				resetMenu();            
+			}else {  
+				document.location.href = newURL;
+			}
+		}
+	}
+	function resetMenu() {
+		document.gomenu.selector.selectedIndex = 2;
+	}
+</script>
+</body>
+</html>
+
+
+
+<script type="text/javascript" src="__STATIC__/MP3/js/audio.js"></script>
+<script type="text/javascript">
+$(function(){
+	var song = <?php echo $mp3;?>;
+
+	var audioFn = audioPlay({
+		song : song,
+		autoPlay : false  //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
+	});
+
+	/* 向歌单中添加新曲目，第二个参数true为新增后立即播放该曲目，false则不播放 */
+	// audioFn.newSong({
+	// 	'cover' : 'images/cover4.jpg',
+	// 	'src' : 'http://so1.111ttt.com:8282/2016/5/06m/06/199061931237.m4a?tflag=1494769315&pin=a0b26b2dddd976d74724841f6d2641d6&ip=114.233.172.33#.mp3',
+	// 	'title' : '极乐净土 - GARNiDELiA'
+	// },true);
+
+	/* 暂停播放 */
+	// audioFn.stopAudio();
+
+	/* 开启播放 */
+	// audioFn.playAudio();
+
+	/* 选择歌单中索引为3的曲目(索引是从0开始的)，第二个参数true立即播放该曲目，false则不播放 */
+	// audioFn.selectMenu(3,true);
+
+	/* 查看歌单中的曲目 */
+	// console.log(audioFn.song);
+
+	/* 当前播放曲目的对象 */
+	// console.log(audioFn.audio);
+});
+</script>

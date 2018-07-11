@@ -1,0 +1,113 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="__STATIC__/admin/css/css?family=Open+Sans:400,700,800" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb"> 
+            <a href="#" class="tip-bottom">
+                <i class="icon-home"></i>
+                后台管理
+            </a> 
+            <a href="#" class="current">后台用户管理</a> <a href="#" class="current">角色列表</a>
+        </div>
+        <h1>添加角色</h1>
+    </div>
+    <div class="container-fluid">
+        <hr>
+        <div class="row-fluid">
+
+
+
+
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title"> 
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>添加角色</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="{:url('/r/rsave')}" method="post" class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">角色名称：</label>
+                                <div class="controls">
+                                    <input type="text" name="name" class="span11" placeholder="角色名称">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">角色描述：</label>
+                                <div class="controls">
+                                    <input type="text" name="description" class="span11" placeholder="角色描述">
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label class="control-label">所属父级:</label>
+                                <div class="controls">
+                                    <select name="parent_id">
+                                        <option value="0">顶级角色</option>
+                                        {volist name="role" id="r"}
+                                           <option value="{$r.id}">{$r['space']|str_repeat="----",###}{$r.name}</option>
+                                        {/volist}
+                                   </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">是否开启：</label>
+                                <div class="controls">
+                                    <label>
+                                        <div class="radio" id="uniform-undefined">
+                                            <span class="checked">
+                                                <input type="radio" name="status" style="opacity: 0;" value="0">
+                                            </span>
+                                        </div>关闭
+                                    </label>
+                                    <label>
+                                        <div class="radio" id="uniform-undefined">
+                                            <span class="">
+                                                <input type="radio" name="status" style="opacity: 0;" value="1" checked="checked">
+                                            </span>
+                                        </div>开启
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){  
+    $('#checkbox_danxuan').find('input[type=checkbox]').bind('click', function(){  
+        $('#checkbox_danxuan').find('input[type=checkbox]').not(this).attr("checked", false);  
+    });  
+});
+
+</script>
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> 
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>

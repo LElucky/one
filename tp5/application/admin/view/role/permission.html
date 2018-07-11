@@ -1,0 +1,99 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="__STATIC__/admin/css/css?family=Open+Sans:400,700,800" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+<script src="__STATIC__/admin/js/jquery-1.7.1.js"></script> 
+<script src="__STATIC__/admin/js/public.js"></script> 
+<script type="text/javascript">
+
+        //全选控制多选
+        function checkbox(id)
+        {
+            $('.2_'+id).prop('checked',$('#1_'+id).prop('checked'));
+        }
+
+        //多选控制单选
+        function checkbox_1(id,data)
+        {
+                 var checked = $(".2_"+id+":checked");
+                 var all = $('.2_'+id);
+                 // alert(checked.length)
+                if(checked.length >= 1 ){
+                    $("#1_"+id).attr("checked", "checked");
+                }else if(checked.length == 0){
+                    $("#1_"+id).attr("checked",false);
+                }else{
+                    $("#1_"+id).attr("checked", false);
+                }
+
+        }
+    
+</script>
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb"> 
+            <a href="#" class="tip-bottom">
+                <i class="icon-home"></i>
+                后台管理
+            </a> 
+            <a href="#" class="current">后台用户管理</a> <a href="#" class="current">角色列表</a>
+        </div>
+        <h1>配置权限</h1>
+    </div>
+    <div class="container-fluid">
+        <hr>
+        <div class="row-fluid">
+            <div class="span12">
+                <form action="{:url('role/addpermission')}" method="post">
+                    <div class="widget-box">
+                        <div class="widget-title" style="margin-bottom:0px;"> 
+                            <h5>你正在为用户组：<code>{$list.name}</code> 分配权限 。</h5>
+                        </div>
+                        <div class="widget-content nopadding" style="padding: 50px !important;
+}">
+                                {volist name="per" id="p"}
+    
+                                        <label class="checkbox-inline" style="display:block;">
+                                                <p style="color:red;"><input type="checkbox" value="{$p['id']}" name="parent[]"  id="1_{$p['id']}" {if condition="$p['is_check'] eq 1"} checked="checked" {/if}  class="model_checkbox" onclick="javascript:checkbox({$p['id']});"><b><font style="color:green;"> [模块]</font> - {$p.name}</b></p>
+                                        </label>
+                                        <p>    
+                                           {volist name="per_2" id="p_2"}
+
+                                                {if condition="$p['id'] == $p_2['pid']"} 
+
+                                                    <label style="display:inline-block;" >{$p_2['level']|str_repeat="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",###}<input type="checkbox" class="{$p.id}_{$p_2['id']} 2_{$p.id}" {if condition="$p_2['is_check'] eq 1"} checked="checked" {/if} value="{$p_2['id']}" name="son[]" onclick="javascript:checkbox_1({$p['id']},{$p_2['id']});"> {$p_2['name']}</label>
+                                                
+                                                {/if}
+                                            {/volist}
+                                        </p>    
+                                  
+                                {/volist}
+                            <br/>
+
+                            <div class="form-actions">
+                                <!--  -->
+                                <input type="hidden" name="id" value="{$_GET['id']}">
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+ 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> 
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>

@@ -1,0 +1,165 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='__STATIC__/admin/css/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#" class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">Excel管理</a> <a href="#" class="current">Excel管理</a>
+		</div>
+		<h1>添加Excel</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget-box">
+					<div class="widget-title"> 
+						<span class="icon"> <i class="icon-align-justify"></i> </span>
+						<h5>添加Excel</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<form action="{:url('Databases/exceldata')}"  method="post" class="form-horizontal" id="excel_form" enctype="multipart/form-data">
+
+							<div class="control-group">
+								<label class="control-label">数据表：</label>
+								<div class="controls">
+									<input type="text" name="table" class="span6" value="y_mp3" placeholder="数据表">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">字段 以,间隔：</label>
+								<div class="controls">
+									<input type="text" name="val" class="span6" value="name" placeholder="字段">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">文件：</label>
+								<div class="controls">
+								
+										<input type="file" name="excel"/>
+									
+									<span id="file"></span><span style="color:red;">大小：{php} echo ini_get('upload_max_filesize'); {/php}M以内.</span>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button type="button" class="btn btn-success" onclick="javascript:submit_form();">保存</button>
+							</div>
+						</form>
+						 <div id="main" style="height:400px"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+   
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+
+<script src="__STATIC__/admin/My97DatePicker/WdatePicker.js"/></script>
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script>
+<script src="__STATIC__/admin/js/bootstrap-colorpicker.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap-datepicker.js"></script> 
+<script src="__STATIC__/admin/js/jquery.toggle.buttons.html"></script> 
+<script src="__STATIC__/admin/js/masked.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script>
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.form_common.js"></script> 
+<script src="__STATIC__/admin/js/wysihtml5-0.3.0.js"></script> 
+<script src="__STATIC__/admin/js/jquery.peity.min.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap-wysihtml5.js"></script>
+<input type="hidden" name="path_excel" value="{:url('admin/databases/exceldata')}">
+<input type="hidden" id="value" value="22">
+<script type="text/javascript">
+
+
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/gauge' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                 myChart = ec.init(document.getElementById('main')); 
+                
+option = {
+    tooltip : {
+        formatter: "{a} <br/>{b} : {c}%"
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            name:'业务指标',
+            type:'gauge',
+            detail : {formatter:'{value}%'},
+            data:[{value: 0, name: '完成率'}]
+        }
+    ]
+};
+
+
+				option.series[0].data[0].value = (0);
+    			
+        
+        option.tooltip.formatter.value = 'sdfdsf';
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+
+
+	function submit_form()
+	{
+        var formData = new FormData($('#excel_form')[0]);
+        var path = $('[name="path_excel"]').val();
+        $.ajax({
+        	url:path,
+        	data:formData,
+ 			//这两个设置项必填
+			  contentType: false,
+			  processData: false,
+
+        	type:'POST',
+        	// dataType: 'JSON',
+        	success:function(status){  	
+        			for(var i = 0; i < status.count; i++)
+        			{
+        				 option.series[0].data[0].value = (status[i+2]['bfb']);
+               			 myChart.setOption(option, true);
+
+        			}
+        			
+        	}
+        })
+	}
+
+    </script>

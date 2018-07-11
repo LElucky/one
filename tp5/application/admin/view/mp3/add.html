@@ -1,0 +1,99 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='__STATIC__/admin/css/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+
+<style>
+	.editimg{ max-width:400px;}
+</style>
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#" class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">MP3管理</a> <a href="#" class="current">MP3列表</a>
+		</div>
+		<h1>添加MP3</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget-box">
+					<div class="widget-title"> 
+						<span class="icon"> <i class="icon-align-justify"></i> </span>
+						<h5>添加MP3</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<form action="{:url('Mp3/save')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+							<div class="control-group">
+								<label class="control-label">MP3名字：</label>
+								<div class="controls">
+									<input type="text" name="name" class="span6" placeholder="MP3名字：">
+								</div>
+							</div>
+	
+							<div class="control-group">
+								<label class="control-label">MP3图片：</label>
+								<div class="controls">
+									
+										<input type="file" name="img"/>
+	
+									<span id="file"></span><span style="color:red;">尺寸:100*100,大小：1M以内.</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">MP3文件：</label>
+								<div class="controls">
+									
+										<input type="file" name="mp3"/>
+	
+									<span id="file"></span><span style="color:red;"></span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">排序：</label>
+								<div class="controls">
+									<input type="text" name="sort" class="span6" placeholder="排序：">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">发布时间：</label>
+								<div class="controls">
+
+										<input type="text" class="span3" name="create_time" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="26" value="<?php echo date('Y-m-d H:i:s',time());?>"/>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-success">保存</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="__STATIC__/admin/My97DatePicker/WdatePicker.js"/></script>
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script>
+<script src="__STATIC__/admin/js/bootstrap-colorpicker.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap-datepicker.js"></script> 
+<script src="__STATIC__/admin/js/jquery.toggle.buttons.html"></script> 
+<script src="__STATIC__/admin/js/masked.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script>
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.form_common.js"></script> 
+<script src="__STATIC__/admin/js/wysihtml5-0.3.0.js"></script> 
+<script src="__STATIC__/admin/js/jquery.peity.min.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap-wysihtml5.js"></script>

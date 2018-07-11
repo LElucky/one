@@ -1,0 +1,91 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>德国斯德克,Sendx, 滨特尔水泵，krohne流量计,HUBA压力传感器,智能数显仪表等产品热销中</title>
+<meta name="keywords" content="德国斯德克,Sendx,HUBA压力传感器,科隆流量计，液位" />
+<meta name="description" content="北京中宝辰科技有限公司是一家工业控制自动化的国际贸易商，专营欧美进口压力，温湿度，液位，流量，泵，阀门等元器件" />
+<meta name="renderer" content="webkit">
+<link href="__PUBLIC__/static/index/css/top.css" rel="stylesheet" type="text/css"/>
+ <script type="text/javascript" src="__STATIC__/index/js/jquery.js"></script>
+    <script src="__STATIC__/index/js/jquery.bxslider.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__STATIC__/index/js/common.js"></script>
+   
+    <script src="__STATIC__/index/js/jquery.kxbdmarquee.min.js" type="text/javascript"></script>
+    
+   
+<script type="text/javascript" src="__STATIC__/index/js/jquery.jslides.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $('.bxslider').bxSlider({
+                controls: true,
+                auto: true
+            });
+
+            $('#marquee2').kxbdMarquee({
+                isEqual: false
+            });
+
+        })
+    </script>
+
+
+
+
+
+ <script src="/style/js/MSClass.js" type="text/javascript"></script>    
+
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="con">
+        <a href="/" class="logo">
+            <img src="__STATIC__/index/picture/logo.jpg" /></a>
+           <form name="formsearch" method="get" action="/plus/search.php">  
+        <div class="search">
+           <input type="hidden" value="0" name="kwtype">
+<input type="text" onblur="if(this.value==''){this.value='请输入关键词';}" onfocus="if(this.value=='请输入关键词'){this.value='';}" value="请输入关键词" class="i-txt" name="keyword">
+            <input type="image" class="i-btn" value=" "  />
+        </div>
+        </form>
+      <div class="rightlogo"> <img src="__STATIC__/index/picture/logo1.jpg" /></div>
+    </div>
+</div>
+
+<div class="topNav">
+    <div class="con clearfix">
+
+        <dl>
+            <dt><a href="{:url('/')}"  class='cur' >首页</a> </dt>
+        </dl>
+        
+        {volist name="column" id="c"}
+        <dl>
+            <dt><a href="{:url('/'.$c.url)}" class=''>{$c.name}</a></dt>
+            <dd>
+
+            {if condition="$c['id'] eq 6"}
+                <div class="item">
+                    <a href="{:url('/1/a')}" >企业简介</a>
+                 </div>
+              
+               
+                <div class="item">
+                    <a href="{:url('/1/a')}" >企业文化</a>
+                 </div>
+             {/if} 
+               
+
+            </dd>
+
+        </dl>
+ {/volist}
+    </div>
+</div>
+
+
+<div class="clear"></div>

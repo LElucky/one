@@ -1,0 +1,138 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='__STATIC__/admin/css/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#" class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">基本配置</a> 
+		</div>
+		<h1>服务器基本信息</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span12">
+
+				<div class="widget-box">
+					<div class="widget-title">
+						<h5>个人信息</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<table class="table table-bordered table-striped with-check">
+							<tbody>
+								<tr>
+									<td width="10%" >姓名</td>
+									<td width="30%">{$Think.SESSION.username}</td>
+									<td width="10%"> 登录次数 </td>
+									<td width="30%">{$web['user_info'][0]['count_login']}<span style="font-size:8px; vertical-align:top">次</span></td>
+								</tr>
+								<tr>
+									<td width="10%">上次登录时间为</td>
+									<td width="30%">{$web['user_info'][0]['last_login_time']|date="Y-m-d H:i:s",###}</td>
+									<td width="10%">&nbsp;</td>
+									<td width="30%">&nbsp;</td>
+							  </tr>
+							</tbody>
+						</table>
+					</div>
+
+
+					<div class="widget-title"> 
+						<h5>系统信息</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<table class="table table-bordered table-striped with-check">
+							<tr>
+								<td width="19%" >服务器操作系统</td>
+								<td width="32%" ><?php echo PHP_OS;?></td>
+								<td width="22%" >软件版本</td>
+								<td width="27%" >{$Think.SERVER.SERVER_SOFTWARE}</td>
+							</tr>
+							<tr>
+								<td >服务器协议</td>
+								<td >{$Think.SERVER.SERVER_PROTOCOL}</td>
+								<td >服务器名称</td>
+								<td >{$Think.SERVER.SERVER_NAME}</td>
+							</tr>
+							<tr>
+								<td >网关接口</td>
+								<td >{$Think.SERVER.GATEWAY_INTERFACE}</td>
+								<td >服务器IP</td>
+								<td >{$Think.SERVER.SERVER_ADDR}</td>
+							</tr>
+							<tr>
+								<td >Socket支持</td>
+								<td >是</td>
+								<td >时区设置</td>
+								<td >{$Think.config.default_timezone}</td>
+							</tr>
+							<tr>
+								<td >是否开启文件上传</td>
+								<td ><?php echo ini_get('file_uploads') ?>
+								&nbsp;&nbsp;[1代表开启,0代表关闭]</td>
+								<td >文件上传的最大大小</td>
+								<td ><?php echo ini_get('upload_max_filesize');?></td>
+							</tr>
+							<tr>
+								<td >编码</td>
+								<td >UTF-8</td>
+								<td ></td>
+								<td ></td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="widget-title"> 
+						<h5>网站高级配置</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<table class="table table-bordered table-striped with-check">
+							<tr>
+								<td width="8%">网站名称：</td>
+								<td width="36%"><strong>{$web['config'][0]['webname']}</strong></td>
+								<td width="11%">开通时间：</td>
+								<td width="45%">{$web['config'][0]['create_time']}</td>
+							</tr>
+							<tr>
+								<td>网站标题：</td>
+								<td>{$web['config'][0]['webtitle']}</td>
+								<td width="11%"></td>
+								<td width="45%"></td>
+							</tr>
+							<tr>
+								<td colspan="4" style="text-align: left;">关键字：{$web['config'][0]['webkeys']}</td>
+							</tr>
+							<tr>
+								<td colspan="4" style="text-align: left;">网站描述：{$web['config'][0]['webdesc']}</td>
+							</tr>
+						</table>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> 
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>

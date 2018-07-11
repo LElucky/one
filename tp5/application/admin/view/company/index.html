@@ -1,0 +1,150 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="__STATIC__/admin/css/css?family=Open+Sans:400,700,800" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+<script src="__STATIC__/admin/js/jquery-1.7.1.js"></script> 
+<script>
+$(function(){
+	$('select[name=industry]').change(function(){
+		if ($(this).val()=='自定义'){
+			$(this).after('<input type="text" class="span11" name="industry"  placeholder="请填写行业类别" style="width:90%;" />');
+		}else{
+			$('input[name=industry]').remove();
+	}
+})
+	
+	$('#edit').click(function(){
+		$('span').each(function(){
+			var value = $(this).text();
+			var name = $(this).attr('name');
+			if ((name=='qywh') || (name=='desc') || (name=='copyright')){
+				$(this).after('<textarea class="span11"  name="'+name+'">'+value+'</textarea>');
+			}else{
+				$(this).after('<input type="text" class="span11" name="'+name+'" value="'+value+'" class="inp"/>');
+			}
+			$(this).remove();
+		})
+	})
+})
+</script>
+
+<div id="content" style="height:100%">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#" class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">公司管理</a> 
+		</div>
+		<h1>基本设置</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span8">
+				<div class="widget-box">
+					<div class="widget-title"> 
+						<span class="icon"> <i class="icon-align-justify"></i> </span>
+						<h5>基本设置 </h5>
+					</div>
+
+					<div class="widget-content nopadding">
+						<form method="post" action="{:url('company/edit')}" enctype="multipart/form-data" class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label">公司名称:</label>
+								<div class="controls">
+									<input type="text" class="span11" name="name" class="inp" placeholder="公司名称"  value="{$list.name}"/>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">所属行业:</label>
+								<div class="controls">
+									{if condition="$list.industry eq ''"}
+										<select name="industry">
+											{volist name="arr" id="vo"}
+												<option value="{$vo}" >{$vo}</option>	
+											{/volist}
+										</select>
+									{else/}
+										<select name="industry">
+											{volist name="arr" id="vo"}
+												<option value="{$vo}" >{$vo}</option>	
+											{/volist}
+											<option value="{$list.industry}" selected="selected">{$list.industry}</option>
+										</select>
+									{/if}
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">地址:</label>
+								<div class="controls">
+									<input type="text" class="span11" name="address" placeholder="地址" class="inp" value="{$list.address}"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">电话:</label>
+								<div class="controls">
+									<input type="text" class="span11" name="tel" class="inp" placeholder="电话" value="{$list.tel}"/>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">手机:</label>
+								<div class="controls">
+									<input type="text" class="span11" name="phone" class="inp" placeholder="手机" value="{$list.phone}"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">传真:</label>
+								<div class="controls">
+									<input type="text" class="span11" name="fax" class="inp" placeholder="传真" value="{$list.fax}"/>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">邮箱:</label>
+								<div class="controls">
+									<input type="text" class="span11" name="email" class="inp" placeholder="邮箱" value="{$list.email}"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">网址:</label>
+								<div class="controls">
+									<input type="text" class="span11" name="url" class="inp" placeholder="网址" value="{$list.url}"/>
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<label class="control-label">备案号:</label>
+								<div class="controls">
+									<input type="text" class="span11" name="recordnum" class="inp" placeholder="备案号" value="{$list.recordnum}"/>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-success">Save</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> 
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>

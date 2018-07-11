@@ -1,0 +1,151 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='__STATIC__/admin/css/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+<script src="__STATIC__/admin/js/jquery-1.7.1.js"></script> 
+<script src="__STATIC__/admin/js/public.js"></script> 
+<script type="text/javascript">
+<!--
+$(function(){
+  //用户批量删除时,得到所选所有ID,用,号连接发送到控制器
+  $('[name=delall]').click(function(){
+    var ids = '';
+    nums = 0;
+    $('[name=del]').each(function(){  
+      if ($(this).attr('checked')=='checked'){
+        ids+=$(this).attr('id')+',';
+        nums = nums+1;
+      }   
+    })
+    
+    if (confirm('你确定要删除这 '+nums+' 条记录吗')){
+      location.href="__URL__/deletes?id="+ids;
+    }
+  })
+})
+//-->
+</script>
+<style type="text/css">
+.nfb{color:#444; font-weight:900} 
+.yfb{color:green;}
+p{display:inline;margin:0; padding:0; color:red;}
+.imgclass{max-width:80px; max-height:80px;}
+</style>
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> 
+      <a href="#"  class="tip-bottom">
+        <i class="icon-home"></i>
+        后台管理
+      </a> 
+      <a href="#" class="current">图片管理</a> <a href="#" class="current">图片列表</a> 
+    </div>
+    <h1>图片列表</h1>
+  </div>
+  <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+
+        <div class="widget-box">
+          <div class="widget-title"> 
+             <span class="icon">
+              <input type="checkbox" id="title-checkbox" name="alldel" />
+              <input type="button" name="delall" value="批量删除" style="display:none" class="btn btn-danger btn-mini">
+            </span> 
+            <h5>图片列表</h5>
+            <form action="{:url('index')}" method="get">
+              按 <select name="search_bzb" style="width:100px;">
+                <option {php} if(isset($_GET['search_bzb'])) echo ($_GET['search_bzb']=='name') ? 'selected=selected' : ""; {/php} value="name">歌名</option>
+                
+                <option {php} if(isset($_GET['search_bzb'])) echo ($_GET['search_bzb']=='id') ? 'selected=selected' : ""; {/php} value="id">编号</option>
+              </select>
+              <input type="text" name="bzb" class="inp span3" style="width:100px;" placeholder="关键词" value="{$Think.get.bzb}">&nbsp;&nbsp;
+              
+              按 <select name="search_tdb" style="width:100px;">
+                <option {php} if(isset($_GET['search_tdb'])) echo ($_GET['search_tdb']=='update_time') ? 'selected=selected' : ""; {/php} value="update_time">添加时间</option>
+                <option {php} if(isset($_GET['search_tdb'])) echo ($_GET['search_tdb']=='id') ? 'selected=selected' : ""; {/php} value="id">编号</option>
+                <option {php} if(isset($_GET['search_tdb'])) echo ($_GET['search_tdb']=='size') ? 'selected=selected' : ""; {/php} value="size">大小</option>
+              </select>
+
+              进行 <select name="order" style="width:100px;">
+                <option {php} if(isset($_GET['order'])) echo ($_GET['order']=='desc') ? 'selected=selected' : ""; {/php} value="desc">降序</option>
+                <option {php} if(isset($_GET['order'])) echo ($_GET['order']=='asc') ? 'selected=selected' : ""; {/php} value="asc">升序</option>
+              </select>
+              <input type="submit" name="search" value="查询" class="btn btn-success">
+            </form>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                <tr>
+                   <th width="5%"><i class="icon-resize-vertical"></i></th> 
+                  <th width="5%">编号</th>
+                  <th widht="10%">排序</th>
+                  <th width="10%">缩略图</th>
+                  <th width="20%">大小/时长</th>
+                  <th width="20%">歌名</th>
+                  <th width="15%">添加时间</th>
+                  <th width="20%">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {volist name="list" id="vo"} 
+                  <tr>
+                     <td width="5%"><input type="checkbox" name="del" id="{$vo.id}"></td> 
+                    <td width="5%">{$vo.id}</td>
+                    <td width="10%"><input style="border:1px gray solid; width:40%;float:left;margin-left:20px;" type="text" name="sort" value="{$vo.sort}" style="width:60px;" onblur="changecommend($(this).val(),{$vo.id})" /><div id="1_{$vo.id}" style="color:red;" ></div></td>
+                    <td width="10%">
+                      <a href="{:url('edit?id='.$vo.id)}">
+                        {if condition="$vo['img'] == ''"}
+                          <img src="__PUBLIC__/admin/1.gif" class="imgclass">
+                        {else/}
+                          <img src="/static/MP3/img/{$vo.img}" class="imgclass">
+                        {/if}
+                      </a>
+                    </td>
+                    <td width="20%">
+                      <a href="{:url('edit?id='.$vo.id)}">{$vo.size.'MB'}&nbsp;&nbsp;/&nbsp;&nbsp;{$vo->getLongTime($vo.filename)}</a>
+                    </td>
+                    <td width="20%">
+                      <a href="{:url('edit?id='.$vo.id)}">{$vo.name}</a>
+                    </td>
+                    <td width="15%">{$vo.create_time}</td>
+                    <td width="20%">
+                      <span>
+                        <a href="{:url('edit?id='.$vo['id'])}" class="btn btn-info">修改</a>
+                        <a href="{:url('delete?id='.$vo['id'])}"  class="btn btn-danger" onClick="return confirm('您确定要将它删除吗')">删除</a>
+                      </span>
+                    </td>
+                  </tr>
+                {/volist}
+              </tbody>
+            </table>
+            <center class="pages">
+              {$list->render()}
+            </center>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" name="commend_path" value="{:url('admin/mp3/sort_status')}">
+<script src="__STATIC__/admin/js/commend.js"></script>
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<!-- <script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> --> 
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>

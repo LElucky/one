@@ -1,0 +1,131 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='__STATIC__/admin/css/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<style>
+	.editimg{ max-width:400px;}
+</style>
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#" class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">消息预览</a> <a href="#" class="current">消息预览</a>
+		</div>
+		<h1>消息预览</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget-box">
+					<div class="widget-title"> 
+						<span class="icon"> <i class="icon-align-justify"></i> </span>
+						<h5>消息预览</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<form action="{:url('ctype/usave')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+							<div class="control-group">
+								<label class="control-label">单位名称：</label>
+								<div class="controls">
+									<input type="text" class="span6" disabled="disabled" value="{$list.company}">
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">联系地址: </label>
+								<div class="controls">
+									<input type="text"  class="span6" disabled="disabled" placeholder="" value="{$list.address}">
+									<span style="color:red;"></span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">联系人: </label>
+								<div class="controls">
+									<input type="text"  class="span6" disabled="disabled" placeholder="" value="{$list.name}">
+									<span style="color:red;"></span>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">联系手机: </label>
+								<div class="controls">
+									<input type="text"  class="span6" disabled="disabled" placeholder="" value="{$list.phone}">
+									<span style="color:red;"></span>
+								</div>
+							</div>
+
+
+
+							<div class="control-group">
+								<label class="control-label">联系邮箱: </label>
+								<div class="controls">
+									<input type="text"  class="span6" disabled="disabled" placeholder="" value="{$list.email}">
+									<span style="color:red;"></span>
+								</div>
+							</div>
+
+
+
+							<div class="control-group">
+								<label class="control-label">品牌和型号: </label>
+								<div class="controls">
+									<input type="text"  class="span6" disabled="disabled" placeholder="" value="{$list.model}">
+									<span style="color:red;"></span>
+								</div>
+							</div>
+
+
+							<div class="control-group">
+								<label class="control-label">内容: </label>
+								<div class="controls">
+									<textarea style="width:50%;height:200px;" disabled="disabled">{$list.address}</textarea>
+								</div>
+							</div>
+	
+							<div class="control-group">
+								<label class="control-label">创建时间：</label>
+								<div class="controls">
+									
+										<input type="text" class="span6" name="update_time" disabled="disabled" size="26" value="{$list.update_time}"/>
+									
+								</div>
+							</div>
+							<div class="form-actions">
+								<input type="hidden" name="id" value="{$list.id}">
+								<a class="btn btn-success" href="{:url('Message/index')}">返回</a>
+								<a class="btn btn-success" href="{:url('Message/delete?id='.$list['id'])}">删除</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="__STATIC__/admin/My97DatePicker/WdatePicker.js"/></script>
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script>
+<script src="__STATIC__/admin/js/bootstrap-colorpicker.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap-datepicker.js"></script> 
+<script src="__STATIC__/admin/js/jquery.toggle.buttons.html"></script> 
+<script src="__STATIC__/admin/js/masked.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script>
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.form_common.js"></script> 
+<script src="__STATIC__/admin/js/wysihtml5-0.3.0.js"></script> 
+<script src="__STATIC__/admin/js/jquery.peity.min.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap-wysihtml5.js"></script>

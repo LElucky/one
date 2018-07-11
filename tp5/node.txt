@@ -1,0 +1,5 @@
+user              用户表
+user_role         用户角色对应表
+role              角色表
+role_permission   角色权限对应表
+permission        角色表

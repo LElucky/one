@@ -1,0 +1,153 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="__STATIC__/admin/css/css?family=Open+Sans:400,700,800" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#" class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">后台用户管理</a> <a href="#" class="current">节点列表</a>
+		</div>
+		<h1>添加节点</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+
+
+
+
+			<div class="span6">
+				<div class="widget-box">
+					<div class="widget-title"> 
+						<span class="icon"> <i class="icon-align-justify"></i> </span>
+						<h5>添加节点</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<form action="{:url('Permission/save')}" method="post" class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label">path : </label>
+								<div class="controls">
+									<input type="text" name="path" class="span11" placeholder="路径">
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">名称：</label>
+								<div class="controls">
+									<input type="text" name="name" class="span11" placeholder="名称">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">说明: </label>
+								<div class="controls">
+									<input type="text" name="description" class="span11" placeholder="说明">
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">状态：</label>
+								<div class="controls">
+									<label>
+										<div class="radio" id="uniform-undefined">
+											<span class="checked">
+												<input type="radio" name="status" style="opacity: 0;" value="0">
+											</span>
+										</div>禁用
+									</label>
+									<label>
+										<div class="radio" id="uniform-undefined">
+											<span class="">
+												<input type="radio" name="status" style="opacity: 0;" value="1" checked="checked">
+											</span>
+										</div>启用
+									</label>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">类型：</label>
+								<div class="controls">
+									<select id="level" name="level">
+											<option value="0">模块</option>
+											<option value="1">操作</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">父节点：</label>
+								<div class="controls">
+									<select name="pid" class="selectpid">
+										<option value="0">根节点</option>
+										{volist name="node" id="vo"}
+												<option value="{$vo.id}">{$vo.name}</option>
+											{volist name="son" id="s"}
+												{if condition="$vo.id == $s.pid"}
+													<option value="{$s.id}">&nbsp;&nbsp;&nbsp;|   {$s.name}</option>
+												{/if}
+											{/volist}					
+										{/volist}
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">是否显示（指操作）：</label>
+								<div class="controls">
+									<label>
+										<div class="radio" id="uniform-undefined">
+											<span class="checked">
+												<input type="radio" name="display" style="opacity: 0;" value="0">
+											</span>
+										</div>不显示
+									</label>
+									<label>
+										<div class="radio" id="uniform-undefined">
+											<span class="">
+												<input type="radio" name="display" style="opacity: 0;" value="1" checked="checked">
+											</span>
+										</div>显示
+									</label>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">排序：</label>
+								<div class="controls">
+									<input type="text" name="sort" class="span11" placeholder="排序">
+								</div>
+							</div>
+
+
+							<div class="form-actions">
+								<button type="submit" class="btn btn-success">保存</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> 
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>

@@ -1,0 +1,109 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="__STATIC__/admin/css/css?family=Open+Sans:400,700,800" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+<script src="__STATIC__/admin/js/jquery-1.7.1.js"></script> 
+<script>
+$(function(){
+	$('#editpic').click(function(){
+		$("#file").append('<input type="file" name="weblogo"/>');
+		$('#editpic').hide();
+		$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
+		$('select').select2();
+		$('.colorpicker').colorpicker();
+		$('.datepicker').datepicker();
+	})
+})
+</script>
+
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#" class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">基本配置</a> 
+		</div>
+		<h1>高级配置</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span8">
+				<div class="widget-box">
+					<div class="widget-title"> 
+						<span class="icon"> <i class="icon-align-justify"></i> </span>
+						<h5>网站高级配置</h5>
+					</div>
+
+					<div class="widget-content nopadding">
+						<form method="post" action="{:url('baseconfig/edit')}" enctype="multipart/form-data" class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label">网站名称:</label>
+								<div class="controls">
+									<input type="text" class="span11" placeholder="网站名称" name="webname"value="{$list.webname}"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">网站标题:</label>
+								<div class="controls">
+									<input type="text" class="span11" placeholder="网站标题" name="webtitle" value="{$list.webtitle}"/>
+								</div>
+							</div>
+							<div class="control-group" style="display:;">
+								<label class="control-label">网站LOGO:</label>
+								<div class="controls">
+									{if condition="$list.weblogo eq ''"}
+										<input type="file" name="weblogo"/>
+									{else/}
+										<img src="__PUBLIC__/uploads/admin/logo/{$list.weblogo}"/><br/><br/><a href="javascript:void(0)" class="btn btn-primary btn-mini" id="editpic">更换</a>
+									{/if}
+									<span id="file"></span><span style="color:red;">尺寸:x*x,大小：1M以内.</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">网站关键字:</label>
+								<div class="controls">
+									<input type="text" class="span11" placeholder="网站关键字" name="webkeys" value="{$list.webkeys}"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">网站描述:</label>
+								<div class="controls">
+									<textarea class="span11" name="webdesc">{$list.webdesc}</textarea>
+								</div>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-success">Save</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> 
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>
+
+
+
+
+
+
+

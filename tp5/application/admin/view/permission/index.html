@@ -1,0 +1,189 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/uniform.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/select2.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__STATIC__/admin/css/matrix-media.css" />
+<link href="__STATIC__/admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="__STATIC__/admin/css/css?family=Open+Sans:400,700,800" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__STATIC__/admin/css/admin.css" />
+
+<script src="__STATIC__/admin/js/jquery-1.7.1.js"></script> 
+<script src="__STATIC__/admin/js/public.js"></script> 
+<script type="text/javascript">
+<!--
+$(function(){
+	//用户批量删除时,得到所选所有ID,用,号连接发送到控制器
+	$('[name=delall]').click(function(){
+		var ids = '';
+		nums = 0;
+		$('[name=del]').each(function(){	
+			if ($(this).attr('checked')=='checked'){
+				ids+=$(this).attr('id')+',';
+				nums = nums+1;
+			}		
+		})
+		
+		if (confirm('你确定要删除这 '+nums+' 条记录吗')){
+			location.href="__URL__/deletenode?id="+ids;
+		}
+	})
+
+	$('.click_status').click(function(){
+		var id = $(this).attr('id');
+		$.post("{:url('admin/permission/display_status')}",{'value':id},function(status){
+				if(status == 1){
+					var len = id.lastIndexOf('_')
+					var val = id.substring(len+1,id.length)
+					var last_id = id.substring(0,len)
+					if(val == 1){
+						$('#'+id).text('不显示')
+						$('#'+id).attr('id',last_id+'_0')
+					}else{
+						$('#'+id).text('显示')
+						$('#'+id).attr('id',last_id+'_1')
+					}
+				}
+		})
+	})
+})
+//-->
+</script>
+<style>
+	.click_status{
+		cursor:pointer;
+	}
+</style>
+
+<div id="content">
+	<div id="content-header">
+		<div id="breadcrumb"> 
+			<a href="#" class="tip-bottom">
+				<i class="icon-home"></i>
+				后台管理
+			</a> 
+			<a href="#" class="current">后台用户管理</a> <a href="#" class="current">节点列表</a> 
+		</div>
+		<h1>节点列表</h1>
+	</div>
+	<div class="container-fluid">
+		<hr>
+		<div class="row-fluid">
+			<div class="span12">
+
+				<div class="widget-box">
+					<div class="widget-title"> 
+						<span class="icon">
+							<input type="checkbox" id="title-checkbox" name="alldel" />
+							<input type="button" name="delall" value="批量删除" style="display:none" class="btn btn-danger btn-mini">
+						</span>
+						<h5>节点列表</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<table class="table table-bordered table-striped with-check">
+							<thead>
+								<tr>
+									<th><i class="icon-resize-vertical"></i></th>
+									<th>权限ID</th>
+									<th>权限结构</th>
+									<th>path</th>
+									<th>排序</th>
+									<th>类型</th>
+									<th>后台显示</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								{volist name="node" id="vo"}
+									<tr class="tdbg {$vo['pid']}">
+										<td><input type="checkbox" name="del" id="{$vo.id}"/></td>
+										<td><div align="center">{$vo.id}</div></td>
+										<td style="text-align: left;width:20%;">
+											{if condition="$vo['level'] eq 0"}
+												<font style="color:red;cursor:pointer;" onclick="tab_list({$vo.id})"><img src="__STATIC__/admin/img/tab1.png" class="{$vo.id}_img">{$vo['space']|str_repeat="----",###}{$vo.name}</font>
+											{elseif condition="$vo['level'] eq 1"}	
+												<font style="color:green;">{$vo['space']|str_repeat="----",###}{$vo.name}</font>
+											{/if}
+											
+										</td>
+										<td width="20%"><div align="center">{$vo.path}</div></td>
+										<td>
+											{if condition="$vo['level'] eq 0"}
+												<div align="center">{$vo.sort}</div>
+											{elseif condition="$vo['level'] eq 1"}
+												<div align="center">&nbsp;&nbsp;| {$vo.sort}</div>
+											{/if}	
+										</td>
+										<td>
+											<div align="center">
+												{if condition="$vo['level'] eq 0"}
+													<div style="color:red;">模块</div>
+												{elseif condition="$vo['level'] eq 1" /}
+													<div style="color:green;">&nbsp;&nbsp;| 操作</div>
+												{else /}
+													<div style="color:blue;">未知</div>
+												{/if}
+											</div>
+										</td>
+										<td>
+											<div align="center">
+												{if condition="$vo['display'] eq 1"}
+													<span class="click_status" id="{$vo['id']}_{$vo['display']}" style="color:green;">显示</span>
+												{else /}
+													<span class="click_status" id="{$vo['id']}_{$vo['display']}" style="color:red;">不显示</span>
+												{/if}
+											</div>
+										</td>
+										<td>
+											<div align="center">
+												<a href="{:url('Permission/edit?id='.$vo['id'])}" class="btn btn-info">修改</a>
+												<a href="{:url('Permission/dele?id='.$vo['id'])}" class="btn btn-danger" onClick="return confirm('您确定要将它删除吗')">删除</a>
+											</div>
+										</td>
+									</tr>
+								{/volist}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script src="__STATIC__/admin/js/jquery.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.ui.custom.js"></script> 
+<script src="__STATIC__/admin/js/bootstrap.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.uniform.js"></script> 
+<script src="__STATIC__/admin/js/select2.min.js"></script> 
+<script src="__STATIC__/admin/js/jquery.dataTables.min.js"></script> 
+<script src="__STATIC__/admin/js/matrix.js"></script> 
+<script src="__STATIC__/admin/js/matrix.tables.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$('.tdbg').each(function(){
+			var st = $(this).attr('class')
+			var cl = st.slice(5)
+			if(cl != 0){
+				$(this).css('display','none')
+			}
+		})
+
+	})
+	function tab_list(id)
+	{
+		 var status = $('.'+id).css('display')
+		 if(status == 'none'){
+ 			$('.'+id).css('display','table-row')
+ 			$('.'+id+'_img').attr('src','/__STATIC__/admin/img/tab2.png')
+		 }else{
+			$('.'+id).css('display','none')
+			$('.'+id+'_img').attr('src','/__STATIC__/admin/img/tab1.png')
+		 }
+	}
+</script>
